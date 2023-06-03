@@ -17,8 +17,9 @@ namespace GeekShopping.API.Model
         public string? Description { get; set; }
         public string? ImageURL { get; set; }
 
-        public Category? Category { get; set; }
-        public int CategoryId { get; set; }
+        [StringLength(500, ErrorMessage = "Tamanho máximo de 500 caracteres")]
+        public string? CategoryName { get; set; }
+
 
        
     }
