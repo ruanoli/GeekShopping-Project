@@ -29,7 +29,7 @@ namespace GeekShopping.API.Repositories
         {
             Product product = await _context.Products
                 .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync() ?? new Product();
 
             return _mapper.Map<ProductVO>(product);
         }
@@ -59,9 +59,9 @@ namespace GeekShopping.API.Repositories
             {
                 Product product = await _context.Products
                     .Where(x => x.Id == id)
-                    .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync() ?? new Product();
 
-                if(product == null)
+                if(product.Id <= 0)
                 {
                     return false;
                 }

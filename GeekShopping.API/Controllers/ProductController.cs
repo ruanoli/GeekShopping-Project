@@ -27,7 +27,7 @@ namespace GeekShopping.API.Controllers
         {
             var product = await _productRepository.GetById(id);
             
-            if(product == null)
+            if(product.Id <= 0)
             {
                 return NotFound();
             }
@@ -61,7 +61,7 @@ namespace GeekShopping.API.Controllers
         {
             var product = await _productRepository.GetById(id);
 
-            if (product == null)
+            if (product.Id <= 0)
                 return NotFound();
 
             await _productRepository.Delete(id);
