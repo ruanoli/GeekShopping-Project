@@ -1,4 +1,4 @@
-﻿using GeekShopping.API.Data.ValueObjects;
+﻿using GeekShopping.Web.Models;
 
 namespace GeekShopping.Web.Service.IService
 {

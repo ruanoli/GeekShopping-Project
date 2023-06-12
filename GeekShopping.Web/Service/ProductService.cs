@@ -1,4 +1,4 @@
-﻿using GeekShopping.API.Data.ValueObjects;
+﻿using GeekShopping.Web.Models;
 using GeekShopping.Web.Service.IService;
 using GeekShopping.Web.Utils;
 using Microsoft.AspNetCore.Server.IIS.Core;
