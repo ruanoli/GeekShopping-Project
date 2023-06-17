@@ -1,6 +1,6 @@
 ﻿@model ProductModel
 
-<form asp-controller="Product" asp-action="Update">
+<form asp-controller="Product" asp-action="Delete">
     <input asp-for="Id" hidden />
     <br />
     <div class="container border p-3">
@@ -50,12 +50,8 @@
             </div>
 
             <div class="col-5">
-                <input type="submit" value="Update" class="btn btn-success form-control" />
+                <input type="submit" value="Delete" class="btn btn-success form-control" />
             </div>
         </div>
     </div>
 </form>
-
-@section Scripts{
-    <partial name="_ValidationScriptsPartial" />
-}

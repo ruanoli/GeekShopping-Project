@@ -53,28 +53,16 @@ namespace GeekShopping.API.Repositories
             return _mapper.Map<ProductVO>(product);
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task<ProductVO> Delete(long id)
         {
-            try
-            {
-                Product product = await _context.Products
-                    .Where(x => x.Id == id)
-                    .FirstOrDefaultAsync() ?? new Product();
+            Product product = await _context.Products
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync() ?? new Product();
 
-                if(product.Id <= 0)
-                {
-                    return false;
-                }
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
 
-                _context.Products.Remove(product);
-                await _context.SaveChangesAsync();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return _mapper.Map<ProductVO>(product);
         }
   
     }

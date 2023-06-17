@@ -1,4 +1,5 @@
 ﻿using GeekShopping.API.Data.ValueObjects;
+using GeekShopping.API.Model;
 using GeekShopping.API.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -59,12 +60,9 @@ namespace GeekShopping.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(long id)
         {
-            var product = await _productRepository.GetById(id);
+            var product = await _productRepository.Delete(id);
 
-            if (product.Id <= 0)
-                return NotFound();
-
-            await _productRepository.Delete(id);
+            if (product == null) return BadRequest();
 
             return Ok(product);
         }

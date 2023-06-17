@@ -13,12 +13,14 @@ namespace GeekShopping.Web.Utils
         public static async Task<T> ReadContentAs<T>(this HttpResponseMessage response)
         {
             if (!response.IsSuccessStatusCode)
-                throw new ApplicationException($"Alguma coisa de errado aconteceu ao chamar a API: {response.ReasonPhrase}");
-            
+                throw new ApplicationException($"Algo de errado aconteceu ao chamar a API {response.ReasonPhrase}");
+
             var dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            return JsonSerializer.Deserialize<T>(dataAsString, 
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return JsonSerializer.Deserialize<T>(dataAsString, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
 
         // Com o conteúdo ja serealizado em JSON, esse método envia a solicitação HTTP POST

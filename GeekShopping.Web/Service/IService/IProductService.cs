@@ -8,6 +8,6 @@ namespace GeekShopping.Web.Service.IService
         Task<ProductModel> GetProductById(long id);
         Task<ProductModel> CreateProduct(ProductModel productModel);
         Task<ProductModel> UpdateProduct(ProductModel productModel);
-        Task<bool> DeleteProductById(long id);
+        Task<ProductModel> DeleteProductById(long id);
     }
 }
