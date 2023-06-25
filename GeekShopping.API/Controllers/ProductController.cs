@@ -1,6 +1,8 @@
 ﻿using GeekShopping.API.Data.ValueObjects;
 using GeekShopping.API.Model;
 using GeekShopping.API.Repositories;
+using GeekShopping.API.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,12 +20,14 @@ namespace GeekShopping.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<ProductVO>>> Index()
         {
             return Ok(await _productRepository.GetAll());
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> GetById(long id)
         {
             var product = await _productRepository.GetById(id);
@@ -38,6 +42,7 @@ namespace GeekShopping.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> Create(ProductVO productVO)
         {
             if (productVO == null)
@@ -48,6 +53,7 @@ namespace GeekShopping.API.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult<ProductVO>> Update(ProductVO productVO)
         {
             if (productVO == null)
@@ -58,6 +64,7 @@ namespace GeekShopping.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public async Task<ActionResult> Delete(long id)
         {
             var product = await _productRepository.Delete(id);
