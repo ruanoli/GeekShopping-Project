@@ -20,21 +20,23 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<SqlServerContext>()
     .AddDefaultTokenProviders();
 
-var builderIdentity = builder.Services.AddIdentityServer(options =>
+var builderServices = builder.Services.AddIdentityServer(options =>
 {
     options.Events.RaiseErrorEvents = true;
     options.Events.RaiseInformationEvents = true;
     options.Events.RaiseFailureEvents = true;
     options.Events.RaiseSuccessEvents = true;
     options.EmitStaticAudienceClaim = true;
-}).AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
-  .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
-  .AddInMemoryClients(IdentityConfiguration.Clients)
-  .AddAspNetIdentity<ApplicationUser>();
+})
+    .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
+    .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
+    .AddInMemoryClients(IdentityConfiguration.Clients)
+    .AddAspNetIdentity<ApplicationUser>();
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
-builderIdentity.AddDeveloperSigningCredential();
+
+builderServices.AddDeveloperSigningCredential();
 
 var app = builder.Build();
 var initializer = app.Services.CreateScope().ServiceProvider.GetService<IDbInitializer>();
